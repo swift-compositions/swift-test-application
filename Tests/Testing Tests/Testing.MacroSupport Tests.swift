@@ -11,7 +11,7 @@ extension Testing {
 
 // MARK: - Unit
 
-extension Testing.MacroSupportTest.Unit {
+extension Testing.`Macro Support Test`.Unit {
     @Testing.Test
     func testIDResolvesToTestID() {
         let id = Testing.__TestID(

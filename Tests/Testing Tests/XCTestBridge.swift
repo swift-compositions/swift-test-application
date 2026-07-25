@@ -43,27 +43,27 @@ import XCTest
 
 final class HelpersTests: XCTestCase {
     func testExpectWithTrueReturnsPassingExpectation() {
-        Testing.HelpersTest.Unit().expectWithTrueReturnsPassingExpectation()
+        Testing.`Helpers Test`.Unit().expectWithTrueReturnsPassingExpectation()
     }
 
     func testExpectWithFalseReturnsFailingExpectation() {
-        Testing.HelpersTest.Unit().expectWithFalseReturnsFailingExpectation()
+        Testing.`Helpers Test`.Unit().expectWithFalseReturnsFailingExpectation()
     }
 
     func testRequireWithTrueDoesNotThrow() throws {
-        try Testing.HelpersTest.Unit().requireWithTrueDoesNotThrow()
+        try Testing.`Helpers Test`.Unit().requireWithTrueDoesNotThrow()
     }
 
     func testRequireWithNonNilOptionalReturnsUnwrappedValue() throws {
-        try Testing.HelpersTest.Unit().requireWithNonNilOptionalReturnsUnwrappedValue()
+        try Testing.`Helpers Test`.Unit().requireWithNonNilOptionalReturnsUnwrappedValue()
     }
 
     func testRequireWithFalseThrows() {
-        Testing.HelpersTest.EdgeCase().requireWithFalseThrows()
+        Testing.`Helpers Test`.`Edge Case`().requireWithFalseThrows()
     }
 
     func testRequireWithNilOptionalThrows() {
-        Testing.HelpersTest.EdgeCase().requireWithNilOptionalThrows()
+        Testing.`Helpers Test`.`Edge Case`().requireWithNilOptionalThrows()
     }
 }
 
@@ -71,19 +71,19 @@ final class HelpersTests: XCTestCase {
 
 final class MacroSupportTests: XCTestCase {
     func testTestIDResolvesToTestID() {
-        Testing.MacroSupportTest.Unit().testIDResolvesToTestID()
+        Testing.`Macro Support Test`.Unit().testIDResolvesToTestID()
     }
 
     func testTestSourceLocationResolvesToTestSourceLocation() {
-        Testing.MacroSupportTest.Unit().testSourceLocationResolvesToTestSourceLocation()
+        Testing.`Macro Support Test`.Unit().testSourceLocationResolvesToTestSourceLocation()
     }
 
     func testTestTraitResolvesToTestTrait() {
-        Testing.MacroSupportTest.Unit().testTraitResolvesToTestTrait()
+        Testing.`Macro Support Test`.Unit().testTraitResolvesToTestTrait()
     }
 
     func testTestBodyResolvesCorrectly() {
-        Testing.MacroSupportTest.Unit().testBodyResolvesCorrectly()
+        Testing.`Macro Support Test`.Unit().testBodyResolvesCorrectly()
     }
 }
 
@@ -115,7 +115,7 @@ final class ConfigurationTests: XCTestCase {
     }
 
     func testCurrentWithNoEnvVarsReturnsDefaults() {
-        Testing.Configuration.Test.EdgeCase().currentWithNoEnvVarsReturnsDefaults()
+        Testing.Configuration.Test.`Edge Case`().currentWithNoEnvVarsReturnsDefaults()
     }
 }
 
@@ -143,27 +143,27 @@ final class DiscoveryTests: XCTestCase {
 
 final class MacroCompilationXCTests: XCTestCase {
     func testOnFreeFunctionCompiles() {
-        MacroCompilationTests.Integration().testOnFreeFunctionCompiles()
+        `Macro Compilation Tests`.Integration().testOnFreeFunctionCompiles()
     }
 
     func testAsyncFunctionCompiles() async {
-        await MacroCompilationTests.Integration().testAsyncFunctionCompiles()
+        await `Macro Compilation Tests`.Integration().testAsyncFunctionCompiles()
     }
 
     func testExpectWithBoolCompiles() {
-        MacroCompilationTests.Integration().expectWithBoolCompiles()
+        `Macro Compilation Tests`.Integration().expectWithBoolCompiles()
     }
 
     func testExpectWithCommentCompiles() {
-        MacroCompilationTests.Integration().expectWithCommentCompiles()
+        `Macro Compilation Tests`.Integration().expectWithCommentCompiles()
     }
 
     func testRequireWithBoolCompiles() throws {
-        try MacroCompilationTests.Integration().requireWithBoolCompiles()
+        try `Macro Compilation Tests`.Integration().requireWithBoolCompiles()
     }
 
     func testRequireWithOptionalUnwrappingCompiles() throws {
-        try MacroCompilationTests.Integration().requireWithOptionalUnwrappingCompiles()
+        try `Macro Compilation Tests`.Integration().requireWithOptionalUnwrappingCompiles()
     }
 }
 // swiftlint:enable no_xctest_import no_xctestcase_subclass

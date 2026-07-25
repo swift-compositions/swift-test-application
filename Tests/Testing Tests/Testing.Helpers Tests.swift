@@ -12,7 +12,7 @@ extension Testing {
 
 // MARK: - Unit
 
-extension Testing.HelpersTest.Unit {
+extension Testing.`Helpers Test`.Unit {
     @Testing.Test
     func expectWithTrueReturnsPassingExpectation() {
         let expectation = Testing.__expect(true)
@@ -43,7 +43,7 @@ extension Testing.HelpersTest.Unit {
 
 // MARK: - EdgeCase
 
-extension Testing.HelpersTest.EdgeCase {
+extension Testing.`Helpers Test`.`Edge Case` {
     @Testing.Test
     func requireWithFalseThrows() {
         let collector = Test.Expectation.Collector()

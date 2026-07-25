@@ -8,7 +8,7 @@ struct `Macro Compilation Tests` {
 
 // MARK: - Integration
 
-extension MacroCompilationTests.Integration {
+extension `Macro Compilation Tests`.Integration {
     @Testing.Test
     func testOnFreeFunctionCompiles() {
         // This test itself uses @Test — if it compiles, the macro works

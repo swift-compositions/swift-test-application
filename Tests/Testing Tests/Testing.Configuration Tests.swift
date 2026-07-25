@@ -70,7 +70,7 @@ extension Testing.Configuration.Test.Unit {
 
 // MARK: - EdgeCase
 
-extension Testing.Configuration.Test.EdgeCase {
+extension Testing.Configuration.Test.`Edge Case` {
     @Testing.Test
     func currentWithNoEnvVarsReturnsDefaults() {
         let config = Testing.Configuration.current
