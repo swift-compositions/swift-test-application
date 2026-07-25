@@ -22,13 +22,23 @@ extension Testing {
     /// a module named "Testing". It runs all discovered tests and exits with
     /// the appropriate status code.
     ///
+    /// Terminates via ``Kernel/Process/Exit/normal(_:)`` (`exit(3)`), never
+    /// ``Kernel/Process/Exit/now(_:)`` (`_exit(2)`). This is load-bearing:
+    /// the reporters emit through `print(_:)`, and `_exit(2)` discards
+    /// unflushed stdio. On a terminal that is invisible — stdout is
+    /// line-buffered, so each `print` has already flushed — but the moment
+    /// the run's output is redirected to a file or pipe it becomes
+    /// block-buffered, and the process would exit with the correct status
+    /// having written none of the report. That is exactly how CI and the
+    /// build coordinator capture test output.
+    ///
     /// - Returns: Never returns; exits the process.
     public static func __swiftPMEntryPoint() async -> Never {
         do throws(Run.Error) {
             try await run(registry: Discovery.all())
-            Kernel.Process.Exit.now(0)
+            Kernel.Process.Exit.normal(0)
         } catch {
-            Kernel.Process.Exit.now(1)
+            Kernel.Process.Exit.normal(1)
         }
     }
 
