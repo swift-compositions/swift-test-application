@@ -142,6 +142,31 @@ swift-testing is pre-1.0 and under active development. Public macro names and th
 
 ---
 
+## Error Handling
+
+The public entry points `Testing.main()` and `Testing.run()` use typed throws. Their only failure is `Run.Error`, thrown when a run completes with one or more failing tests:
+
+```
+Run.Error
+└── failed(Test.Runner.Result)   // the run completed with failures; carries the runner result
+```
+
+Handle it exhaustively with a typed `do`/`catch`:
+
+```swift
+import Testing
+
+do throws(Run.Error) {
+    try await Testing.run()
+} catch .failed(let result) {
+    // One or more tests failed. `result` is the full Test.Runner.Result
+    // (counts and per-test outcomes) for custom reporting or exit handling.
+    print("Test run failed: \(result)")
+}
+```
+
+---
+
 ## Community
 
 <!-- BEGIN: discussion -->
