@@ -1,7 +1,0 @@
-# Draft
-
-## Introduction
-Hello, world.
-
-## Conclusion
-Goodbye.

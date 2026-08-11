@@ -1,3 +1,0 @@
-User: Alice
-Email: alice@example.com
-Role: admin
