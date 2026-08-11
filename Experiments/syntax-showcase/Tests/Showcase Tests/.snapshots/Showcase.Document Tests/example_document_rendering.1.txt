@@ -1,7 +1,0 @@
-# Getting Started
-
-## Installation
-Add the package dependency.
-
-## Usage
-Import the module and call the API.
