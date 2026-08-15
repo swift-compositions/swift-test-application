@@ -14,6 +14,7 @@ public import Test_Primitives
 // MARK: - Helpers for Macro Expansion
 
 extension Testing {
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     /// Helper for #expect macro expansion.
     ///
     /// Macros expand to calls to this function, which delegates to
@@ -38,6 +39,7 @@ extension Testing {
         )
     }
 
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     /// Helper for #require macro expansion (Bool version).
     ///
     /// Macros expand to calls to this function, which delegates to
@@ -61,6 +63,7 @@ extension Testing {
         )
     }
 
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     /// Helper for #require macro expansion (Optional version).
     ///
     /// Macros expand to calls to this function, which delegates to

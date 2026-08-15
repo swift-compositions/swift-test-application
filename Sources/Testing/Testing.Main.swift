@@ -16,6 +16,7 @@ import Tests_Reporter
 import Witnesses
 
 extension Testing {
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     /// SwiftPM entry point for test execution.
     ///
     /// This function is called by SwiftPM's generated test runner when it detects
