@@ -98,20 +98,25 @@ extension TestMacro {
         // Single collection: generates a for-loop calling the function once per element.
         // Multiple collections: generates nested for-loops (Cartesian product).
         if !argCollections.isEmpty, !funcParams.isEmpty {
-            let callArgs = buildParametricCallArgs(funcParams: funcParams, argCollections: argCollections)
+            let callArgs = buildParametricCallArgs(
+                funcParams: funcParams,
+                argCollections: argCollections
+            )
             let loopOpen = buildLoopOpening(argCollections: argCollections)
             let loopClose = String(repeating: " }", count: argCollections.count)
             let awaitKeyword = isAsync ? "await " : ""
 
             if let typeRef {
-                let body = "let suite = \(typeRef)(); \(loopOpen)\(tryKeyword)\(awaitKeyword)suite.\(funcRef)(\(callArgs))\(loopClose)"
+                let body =
+                    "let suite = \(typeRef)(); \(loopOpen)\(tryKeyword)\(awaitKeyword)suite.\(funcRef)(\(callArgs))\(loopClose)"
                 if isAsync {
                     bodyExpr = "Testing.__TestBody.async { \(raw: body) }"
                 } else {
                     bodyExpr = "Testing.__TestBody.sync { \(raw: body) }"
                 }
             } else {
-                let body = "\(loopOpen)\(tryKeyword)\(awaitKeyword)\(funcRef)(\(callArgs))\(loopClose)"
+                let body =
+                    "\(loopOpen)\(tryKeyword)\(awaitKeyword)\(funcRef)(\(callArgs))\(loopClose)"
                 if isAsync {
                     bodyExpr = "Testing.__TestBody.async { \(raw: body) }"
                 } else {
@@ -120,9 +125,11 @@ extension TestMacro {
             }
         } else if let typeRef {
             if isAsync {
-                bodyExpr = "Testing.__TestBody.async { let suite = \(raw: typeRef)(); \(raw: tryKeyword)await suite.\(raw: funcRef)() }"
+                bodyExpr =
+                    "Testing.__TestBody.async { let suite = \(raw: typeRef)(); \(raw: tryKeyword)await suite.\(raw: funcRef)() }"
             } else {
-                bodyExpr = "Testing.__TestBody.sync { let suite = \(raw: typeRef)(); \(raw: tryKeyword)suite.\(raw: funcRef)() }"
+                bodyExpr =
+                    "Testing.__TestBody.sync { let suite = \(raw: typeRef)(); \(raw: tryKeyword)suite.\(raw: funcRef)() }"
             }
         } else {
             if isAsync {
