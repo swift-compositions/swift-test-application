@@ -1,4 +1,4 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 
 import CompilerPluginSupport
 import PackageDescription
@@ -6,11 +6,11 @@ import PackageDescription
 let package = Package(
     name: "swift-testing",
     platforms: [
-        .macOS(.v26),
-        .iOS(.v26),
-        .tvOS(.v26),
-        .watchOS(.v26),
-        .visionOS(.v26)
+        .macOS(.v27),
+        .iOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .visionOS(.v27),
     ],
     products: [
         // Full testing library - users import this single module
@@ -23,13 +23,22 @@ let package = Package(
         .library(
             name: "Testing Test Support",
             targets: ["Testing Test Support"]
-        )
+        ),
     ],
     dependencies: [
         // Tier 1: Primitives
-        .package(url: "https://github.com/swift-primitives/swift-standard-library-extensions.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-time-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-test-primitives.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-primitives/swift-standard-library-extensions.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-time-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-test-primitives.git",
+            branch: "main"
+        ),
         // Tier 2: Runner infrastructure
         .package(url: "https://github.com/swift-foundations/swift-tests.git", branch: "main"),
         // Platform abstraction (file I/O, environment variables)
@@ -39,13 +48,16 @@ let package = Package(
         // Dynamic loader (symbol lookup)
         .package(url: "https://github.com/swift-foundations/swift-loader.git", branch: "main"),
         // Dependency injection
-        .package(url: "https://github.com/swift-foundations/swift-dependencies.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-foundations/swift-dependencies.git",
+            branch: "main"
+        ),
         // Effects system (for optional Testing Effects target)
         .package(url: "https://github.com/swift-foundations/swift-effects.git", branch: "main"),
         // Witness system (mode context for test/live execution)
         .package(url: "https://github.com/swift-foundations/swift-witnesses.git", branch: "main"),
         // Macro implementation
-        .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0"..<"603.0.0")
+        .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0"..<"603.0.0"),
     ],
     targets: [
 
@@ -62,7 +74,7 @@ let package = Package(
                 .product(name: "SwiftSyntax", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacroExpansion", package: "swift-syntax"),
-                .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax")
+                .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
             ],
             path: "Sources/Testing Umbrella"
         ),
@@ -76,7 +88,10 @@ let package = Package(
                 .product(name: "Tests Reporter", package: "swift-tests"),
                 .product(name: "Tests Inline Snapshot", package: "swift-tests"),
                 .product(name: "Test Primitives", package: "swift-test-primitives"),
-                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
+                .product(
+                    name: "Standard Library Extensions",
+                    package: "swift-standard-library-extensions"
+                ),
                 .product(name: "Time Primitives", package: "swift-time-primitives"),
                 .product(name: "Kernel", package: "swift-kernel"),
                 .product(name: "Environment", package: "swift-environment"),
@@ -93,7 +108,7 @@ let package = Package(
             name: "Testing Macros Implementation",
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
-                .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
+                .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
             ],
             path: "Sources/Testing Macros Implementation"
         ),
@@ -105,7 +120,7 @@ let package = Package(
             dependencies: [
                 "Testing Core",
                 .product(name: "Effects", package: "swift-effects"),
-                .product(name: "Effects Testing", package: "swift-effects")
+                .product(name: "Effects Testing", package: "swift-effects"),
             ],
             path: "Sources/Testing Effects"
         ),
