@@ -9,23 +9,43 @@
 //
 // ===----------------------------------------------------------------------===//
 
+import Environment
 import Test_Application
+import Test
 
-enum Argument {}
+extension Test.CLI {
+    enum Argument {}
+}
 
-extension Argument {
+extension Test.CLI.Argument {
     static func configuration(
-        from arguments: [Swift.String]
-    ) throws(ArgumentError) -> Test.Application.Configuration {
+        from arguments: [Swift.String],
+        environment: Environment.Snapshot
+    ) throws(Error) -> Test.Application.Configuration {
         var index = 0
         var workingDirectory: Swift.String?
+        var inheritedOutput = false
+        var environment = environment
 
-        if arguments.first == "--working-directory" {
-            guard arguments.count > 1 else {
-                throw .missingWorkingDirectory
+        options: while arguments.indices.contains(index) {
+            switch arguments[index] {
+            case "--working-directory":
+                guard arguments.indices.contains(index + 1) else { throw .missingWorkingDirectory }
+                workingDirectory = arguments[index + 1]
+                index += 2
+            case "--environment":
+                guard arguments.indices.contains(index + 1) else { throw .missingEnvironment }
+                let pair = arguments[index + 1].split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+                guard pair.count == 2, !pair[0].isEmpty else { throw .invalidEnvironment }
+                environment[Swift.String(pair[0])] = Swift.String(pair[1])
+                index += 2
+            case "--inherit-output":
+                inheritedOutput = true
+                index += 1
+            default:
+                if arguments[index].hasPrefix("--") { throw .unknownOption(arguments[index]) }
+                break options
             }
-            workingDirectory = arguments[1]
-            index = 2
         }
 
         guard arguments.indices.contains(index) else {
@@ -36,8 +56,10 @@ extension Argument {
             command: .init(
                 executable: arguments[index],
                 arguments: Array(arguments.dropFirst(index + 1)),
+                environment: environment,
                 workingDirectory: workingDirectory
-            )
+            ),
+            output: inheritedOutput ? .inherited : .captured
         )
     }
 }

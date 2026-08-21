@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Test
+
 extension Test.Application {
     /// Child-process stream handling policy.
     public enum Output: Sendable, Equatable {

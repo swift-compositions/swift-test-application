@@ -2,12 +2,12 @@
 
 External test-process orchestration for Swift.
 
-`swift-test-application` translates test commands into child processes and returns typed receipts containing the exit status and captured output. It does not define test macros, discover tests, or run tests in-process; Apple Testing and the selected build tool retain those responsibilities.
+`swift-test-application` translates test commands into child processes and returns typed receipts containing the exit status and captured output. It also owns terminal and structured reporting plus versioned benchmark-reference persistence. It does not define test macros, discover tests, or run tests in-process; Apple Testing and the selected build tool retain those responsibilities.
 
 ## Products
 
-- `Test Application` provides `Test.Application` command, configuration, execution, and receipt types.
-- `Test CLI` translates command-line arguments into a `Test.Application` invocation.
+- `Test Application` provides `Test.Application` command, configuration, execution, event, reporting, receipt, and benchmark-store types.
+- `Test CLI` translates command-line arguments and environment into a `Test.Application` invocation.
 
 ## Installation
 
@@ -44,6 +44,8 @@ let receipt = try Test.Application.run(
     )
 )
 
+print(Test.Application.Report.terminal(receipt), terminator: "")
+
 switch receipt.status {
 case .exited(code: 0):
     print("tests passed")
@@ -52,11 +54,35 @@ default:
 }
 ```
 
-The command-line product accepts an optional working directory followed by the executable and its arguments:
+Use the command factories when the selected build tool should remain explicit:
+
+```swift
+let swiftPackage = Test.Application.Command.swiftPackage(
+    at: "/path/to/package",
+    arguments: ["--parallel"]
+)
+
+let xcode = Test.Application.Command.xcode(
+    workspace: "/path/to/project/Example.xcworkspace",
+    scheme: "Example"
+)
+```
+
+The command-line product accepts a working directory, repeated environment overrides, optional inherited output, and then the executable plus its arguments:
 
 ```sh
-test-cli --working-directory /path/to/package swift test
+test-cli \
+  --working-directory /path/to/package \
+  --environment SWIFT_DETERMINISTIC_HASHING=1 \
+  --inherit-output \
+  swift test
 ```
+
+## Reporting and benchmark references
+
+`Test.Application.Report.structured(_:)` produces a versioned JSON receipt. A `Test.Application.Reporter` receives ordered `.started` and `.finished` events without installing mutable global handlers.
+
+`Test.Application.Benchmark.Store` persists `Benchmark.Baseline<JSON>` and `Benchmark.History<JSON>` as versioned JSON documents. Writes use the canonical file-system owner's atomic streaming operation; reads reject a mismatched schema or document kind.
 
 ## Error handling
 

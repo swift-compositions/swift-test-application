@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Test_Primitives_Core
+public import Test
 
 extension Test {
     /// External test-process orchestration.

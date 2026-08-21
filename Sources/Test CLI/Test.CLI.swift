@@ -9,32 +9,44 @@
 //
 // ===----------------------------------------------------------------------===//
 
-import Process
+import Console
+public import Environment_Core
 import Test_Application
+public import Test
 
-@main
-enum TestCLI {
-    static func main() {
-        do {
-            let configuration = try Argument.configuration(
-                from: Array(CommandLine.arguments.dropFirst())
-            )
+extension Test {
+    public enum CLI {}
+}
+
+extension Test.CLI {
+    public static func main(
+        arguments: [Swift.String],
+        environment: Environment.Snapshot
+    ) -> Int32 {
+        let configuration: Test.Application.Configuration
+        do throws(Test.CLI.Argument.Error) {
+            configuration = try Argument.configuration(from: arguments, environment: environment)
+        } catch {
+            Console.Output.error("usage: test-cli [--working-directory PATH] [--environment KEY=VALUE] [--inherit-output] EXECUTABLE [ARGUMENT ...]\n")
+            return 2
+        }
+
+        do throws(Test.Application.Error) {
             let receipt = try Test.Application.run(configuration)
-
             if let bytes = receipt.standardOutput {
                 Swift.print(Swift.String(decoding: bytes, as: UTF8.self), terminator: "")
             }
             if let bytes = receipt.standardError {
-                Swift.print(Swift.String(decoding: bytes, as: UTF8.self), terminator: "")
+                Console.Output.error(Swift.String(decoding: bytes, as: UTF8.self))
             }
 
             switch receipt.status {
-            case .exited(let code): Process.exit(code)
-            case .signaled, .stopped: Process.exit(1)
+            case .exited(let code): return code
+            case .signaled, .stopped: return 1
             }
         } catch {
-            Swift.print("usage: test-cli [--working-directory PATH] EXECUTABLE [ARGUMENT ...]")
-            Process.exit(2)
+            Console.Output.error("test invocation failed: \(error)\n")
+            return 2
         }
     }
 }

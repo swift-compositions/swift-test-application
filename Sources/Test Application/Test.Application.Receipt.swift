@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Test
+
 extension Test.Application {
     /// Facts returned by an external test invocation.
     public struct Receipt: Sendable, Equatable {
@@ -29,10 +31,12 @@ extension Test.Application {
 }
 
 extension Test.Application.Receipt {
-    /// Platform-neutral terminal state of the external test process.
-    public enum Status: Sendable, Equatable, Hashable {
-        case exited(code: Int32)
-        case signaled(signal: Int32)
-        case stopped(signal: Int32)
+    public var outcome: Test.Application.Outcome {
+        switch status {
+        case .exited(code: 0): .passed
+        case .exited(let code): .failed(code: code)
+        case .signaled(let signal): .interrupted(signal: signal)
+        case .stopped(let signal): .stopped(signal: signal)
+        }
     }
 }

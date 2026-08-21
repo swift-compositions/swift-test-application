@@ -9,19 +9,22 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Environment
+public import Test
+
 extension Test.Application {
     /// A test command translated into an external process invocation.
     public struct Command: Sendable, Equatable {
         public let executable: Swift.String
         public let arguments: [Swift.String]
-        public let environment: [Swift.String: Swift.String]?
+        public let environment: Environment.Snapshot?
         public let workingDirectory: Swift.String?
         public let timeout: Duration?
 
         public init(
             executable: Swift.String,
             arguments: [Swift.String] = [],
-            environment: [Swift.String: Swift.String]? = nil,
+            environment: Environment.Snapshot? = nil,
             workingDirectory: Swift.String? = nil,
             timeout: Duration? = nil
         ) {

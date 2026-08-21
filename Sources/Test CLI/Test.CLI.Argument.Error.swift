@@ -9,7 +9,15 @@
 //
 // ===----------------------------------------------------------------------===//
 
-enum ArgumentError: Swift.Error, Sendable {
-    case missingExecutable
-    case missingWorkingDirectory
+import Test_Application
+import Test
+
+extension Test.CLI.Argument {
+    enum Error: Swift.Error, Sendable, Equatable {
+        case invalidEnvironment
+        case missingEnvironment
+        case missingExecutable
+        case missingWorkingDirectory
+        case unknownOption(Swift.String)
+    }
 }

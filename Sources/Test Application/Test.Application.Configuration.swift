@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Test
+
 extension Test.Application {
     /// Configuration for one external test invocation.
     public struct Configuration: Sendable, Equatable {

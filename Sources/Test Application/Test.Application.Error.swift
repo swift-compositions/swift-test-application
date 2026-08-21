@@ -9,9 +9,12 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Process
+public import Test
+
 extension Test.Application {
     /// Failure to launch, wait for, or capture an external test process.
     public enum Error: Swift.Error, Sendable, Equatable {
-        case process
+        case process(Process.Error)
     }
 }
