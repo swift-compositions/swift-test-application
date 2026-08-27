@@ -26,36 +26,36 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Tier 1: Primitives
+        // Layers 1–2: Atoms and molecules
         .package(
-            url: "https://github.com/swift-primitives/swift-standard-library-extensions.git",
+            url: "https://github.com/swift-molecules/swift-standard-library-extensions.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-time-primitives.git",
+            url: "https://github.com/swift-molecules/swift-time.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-test-primitives.git",
+            url: "https://github.com/swift-molecules/swift-test.git",
             branch: "main"
         ),
-        // Tier 2: Runner infrastructure
-        .package(url: "https://github.com/swift-foundations/swift-tests.git", branch: "main"),
+        // Layer 4: Runner infrastructure
+        .package(url: "https://github.com/swift-compositions/swift-tests.git", branch: "main"),
         // Platform abstraction (file I/O, environment variables)
-        .package(url: "https://github.com/swift-foundations/swift-kernel.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-kernel.git", branch: "main"),
         // Environment variable reading
-        .package(url: "https://github.com/swift-foundations/swift-environment.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-environment.git", branch: "main"),
         // Dynamic loader (symbol lookup)
-        .package(url: "https://github.com/swift-foundations/swift-loader.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-loader.git", branch: "main"),
         // Dependency injection
         .package(
-            url: "https://github.com/swift-foundations/swift-dependencies.git",
+            url: "https://github.com/swift-compositions/swift-dependencies.git",
             branch: "main"
         ),
         // Effects system (for optional Testing Effects target)
-        .package(url: "https://github.com/swift-foundations/swift-effects.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-effects.git", branch: "main"),
         // Witness system (mode context for test/live execution)
-        .package(url: "https://github.com/swift-foundations/swift-witnesses.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-witnesses.git", branch: "main"),
         // Macro implementation
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0"..<"603.0.0"),
     ],
@@ -87,12 +87,12 @@ let package = Package(
                 .product(name: "Tests", package: "swift-tests"),
                 .product(name: "Tests Reporter", package: "swift-tests"),
                 .product(name: "Tests Inline Snapshot", package: "swift-tests"),
-                .product(name: "Test Primitives", package: "swift-test-primitives"),
+                .product(name: "Test", package: "swift-test"),
                 .product(
                     name: "Standard Library Extensions",
                     package: "swift-standard-library-extensions"
                 ),
-                .product(name: "Time Primitives", package: "swift-time-primitives"),
+                .product(name: "Time", package: "swift-time"),
                 .product(name: "Kernel", package: "swift-kernel"),
                 .product(name: "Environment", package: "swift-environment"),
                 .product(name: "Loader", package: "swift-loader"),

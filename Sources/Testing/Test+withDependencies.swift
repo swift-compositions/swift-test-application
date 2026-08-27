@@ -10,7 +10,7 @@
 // ===----------------------------------------------------------------------===//
 
 public import Dependencies
-public import Test_Primitives
+public import Test
 
 extension Test {
     /// Execute test code with dependency overrides.

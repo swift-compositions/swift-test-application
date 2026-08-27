@@ -10,7 +10,7 @@
 // ===----------------------------------------------------------------------===//
 
 internal import Environment
-public import Test_Primitives
+public import Test
 
 extension Testing {
     /// Configuration for test execution.

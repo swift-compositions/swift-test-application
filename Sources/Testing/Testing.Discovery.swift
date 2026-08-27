@@ -10,7 +10,6 @@
 // ===----------------------------------------------------------------------===//
 
 internal import Loader
-internal import Loader_Primitives
 
 extension Testing {
     /// Test and suite discovery via section enumeration and symbol lookup.

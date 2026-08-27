@@ -13,7 +13,7 @@ public import SwiftSyntax
 import SwiftSyntaxMacroExpansion
 public import SwiftSyntaxMacros
 public import SwiftSyntaxMacrosGenericTestSupport
-public import Test_Primitives
+public import Test
 /// Asserts that a macro expands to the expected source code.
 ///
 /// This function bridges `SwiftSyntaxMacrosGenericTestSupport` to Swift Testing

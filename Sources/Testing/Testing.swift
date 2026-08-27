@@ -12,8 +12,8 @@
 /// User-facing testing library providing macros, discovery, and entry point.
 ///
 /// swift-testing builds on:
-/// - Tier 1: swift-test-primitives (pure data types)
-/// - Tier 2: swift-tests (runner infrastructure)
+/// - Layer 2: swift-test (pure data types)
+/// - Layer 4: swift-tests (runner infrastructure)
 ///
 /// ## Usage
 ///

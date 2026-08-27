@@ -1,4 +1,4 @@
-import Test_Primitives
+import Test
 import Testing
 import Testing_Test_Support
 

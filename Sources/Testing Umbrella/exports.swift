@@ -12,9 +12,9 @@
 // MARK: - Umbrella Module Exports
 //
 // This module is what users import as "Testing".
-// Testing_Core transitively provides: Test_Primitives, Tests (which
+// Testing_Core transitively provides: Test, Tests (which
 // includes Tests_Inline_Snapshot, Tests_Snapshot, Tests_Performance),
-// Dependencies, and Time_Primitives.
+// Dependencies, and Time.
 
 // Re-export SwiftSyntax types for macro testing
 // Users need: Macro, DiagnosticSpec, Trivia for assertMacroExpansion()

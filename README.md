@@ -85,7 +85,7 @@ Add swift-testing to your `Package.swift` (pre-tag — pin to `main`):
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-foundations/swift-testing.git", branch: "main")
+    .package(url: "https://github.com/swift-compositions/swift-test-application.git", branch: "main")
 ]
 ```
 

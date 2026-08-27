@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Test_Primitives
+public import Test
 
 // MARK: - Helpers for Macro Expansion
 

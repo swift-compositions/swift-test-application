@@ -2,7 +2,7 @@
 # Triaged by AI-assisted bulk pass (2026-04-29).
 description: "Macro-based test authoring with @Test, @Suite, #expect, and #require, a parallel runner, and typed throws for Swift."
 topics:
-  - foundations
+  - compositions
   - testing
 homepage: "https://swift-institute.org"
 readme:

@@ -12,7 +12,7 @@ extension Testing.Configuration {
     public static func stub(
         filter: Swift.String? = nil,
         tags: Swift.Set<Swift.String>? = nil,
-        concurrency: Test_Primitives.Test.Runner.Concurrency = .serial,
+        concurrency: Test.Test.Runner.Concurrency = .serial,
         output: Output = Output()
     ) -> Self {
         var config = Self()

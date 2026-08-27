@@ -11,7 +11,7 @@
 
 public import Effects
 public import Effects_Testing
-public import Test_Primitives
+public import Test
 
 extension Test {
     /// Create a spy for recording effect invocations.
