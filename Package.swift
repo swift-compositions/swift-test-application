@@ -28,7 +28,7 @@ let package = Package(
     dependencies: [
         // Layers 1–2: Atoms and molecules
         .package(
-            url: "https://github.com/swift-molecules/swift-standard-library-extensions.git",
+            url: "https://github.com/swift-atoms/swift-standard-library-extensions.git",
             branch: "main"
         ),
         .package(
