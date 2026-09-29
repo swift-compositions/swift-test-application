@@ -25,13 +25,13 @@ public import Tests
 
 extension Testing {
     /// Unambiguous reference to Test.ID for macro expansions.
-    public typealias __TestID = Test.Test.ID
+    public typealias __TestID = Test::Test.ID
 
     /// Unambiguous reference to Source.Location for macro expansions.
     public typealias __TestSourceLocation = Source.Location
 
     /// Unambiguous reference to Test.Trait for macro expansions.
-    public typealias __TestTrait = Test.Test.Trait
+    public typealias __TestTrait = Test::Test.Trait
 
     /// Unambiguous reference to Test.Body for macro expansions.
     /// Note: Test.Body is defined in the Tests module as an extension on Test.
