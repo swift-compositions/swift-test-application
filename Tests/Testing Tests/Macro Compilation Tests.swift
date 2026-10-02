@@ -1,43 +1,36 @@
-import Test_Application
-import Testing_Test_Support
+import Testing
 
 @Suite
 struct `Macro Compilation Tests` {
     @Suite struct Integration {}
 }
 
-// MARK: - Integration
-
 extension `Macro Compilation Tests`.Integration {
-    @Testing.Test
+    @Test
     func testOnFreeFunctionCompiles() {
-        // This test itself uses @Test — if it compiles, the macro works
     }
 
-    @Testing.Test
+    @Test
     func testAsyncFunctionCompiles() async {
-        // Async @Test compiles successfully
     }
 
-    @Testing.Test
+    @Test
     func expectWithBoolCompiles() {
-        #expect(true)
+        Observe.instituteExpectWithBool()
     }
 
-    @Testing.Test
+    @Test
     func expectWithCommentCompiles() {
-        #expect(true, "always true")
+        Observe.instituteExpectWithComment()
     }
 
-    @Testing.Test
+    @Test
     func requireWithBoolCompiles() throws {
-        try #require(true)
+        try Observe.instituteRequireWithBool()
     }
 
-    @Testing.Test
+    @Test
     func requireWithOptionalUnwrappingCompiles() throws {
-        let value: Int? = 42
-        let unwrapped = try #require(value)
-        #expect(unwrapped == 42)
+        #expect(try Observe.instituteRequireWithOptionalUnwrapping() == 42)
     }
 }

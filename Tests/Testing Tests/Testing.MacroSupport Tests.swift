@@ -1,58 +1,32 @@
-import Test
-import Test_Application
-import Testing_Test_Support
+import Testing
 
-extension Testing {
-    @Suite
-    struct `Macro Support Test` {
-        @Suite struct Unit {}
-    }
+@Suite
+struct `Macro Support Test` {
+    @Suite struct Unit {}
 }
 
-// MARK: - Unit
-
-extension Testing.`Macro Support Test`.Unit {
-    @Testing.Test
+extension `Macro Support Test`.Unit {
+    @Test
     func testIDResolvesToTestID() {
-        let id = Testing.__TestID(
-            module: "TestModule",
-            name: "testFunc",
-            sourceLocation: .init(
-                fileID: "test/file.swift",
-                filePath: "/test/file.swift",
-                line: 1,
-                column: 1
-            )
-        )
+        let id = Observe.testID()
         #expect(id.name == "testFunc")
         #expect(id.module == "TestModule")
     }
 
-    @Testing.Test
+    @Test
     func testSourceLocationResolvesToTestSourceLocation() {
-        let location = Testing.__TestSourceLocation(
-            fileID: "module/file.swift",
-            filePath: "/path/to/file.swift",
-            line: 42,
-            column: 10
-        )
-        #expect(location.line == 42)
-        #expect(location.column == 10)
+        let location = Observe.testSourceLocation()
+        #expect(location.line == "42")
+        #expect(location.column == "10")
     }
 
-    @Testing.Test
+    @Test
     func testTraitResolvesToTestTrait() {
-        let trait: Testing.__TestTrait = .enabled(if: true)
-        if case .enabled(true, _) = trait.kind {
-        } else {
-            #expect(false, "Expected .enabled(true) trait")
-        }
+        #expect(Observe.enabledTraitIsEnabledTrue(), "Expected .enabled(true) trait")
     }
 
-    @Testing.Test
+    @Test
     func testBodyResolvesCorrectly() {
-        let body: Testing.__TestBody = .sync {}
-        // Body exists and was constructed successfully
-        _ = body
+        #expect(Observe.syncTestBodyConstructs())
     }
 }

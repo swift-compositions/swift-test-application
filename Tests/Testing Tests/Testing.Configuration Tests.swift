@@ -1,79 +1,49 @@
-import Test_Application
-import Testing_Test_Support
+import Testing
 
-extension Testing.Configuration {
-    @Suite
-    struct Test {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-    }
+@Suite
+struct `Configuration Test` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
 }
 
-// MARK: - Unit
-
-extension Testing.Configuration.Test.Unit {
-    @Testing.Test
+extension `Configuration Test`.Unit {
+    @Test
     func initCreatesDefaultConfigurationWithNilFilter() {
-        let config = Testing.Configuration()
-        #expect(config.filter == nil)
+        #expect(Observe.defaultConfiguration().filter == nil)
     }
 
-    @Testing.Test
+    @Test
     func initCreatesDefaultConfigurationWithNilTags() {
-        let config = Testing.Configuration()
-        #expect(config.tags == nil)
+        #expect(Observe.defaultConfiguration().tagsIsNil)
     }
 
-    @Testing.Test
+    @Test
     func initCreatesDefaultConfigurationWithAutomaticConcurrency() {
-        let config = Testing.Configuration()
-        if case .automatic = config.concurrency {
-        } else {
-            #expect(false, "Expected .automatic concurrency")
-        }
+        #expect(Observe.defaultConfiguration().concurrencyIsAutomatic, "Expected .automatic concurrency")
     }
 
-    @Testing.Test
+    @Test
     func initCreatesDefaultConfigurationWithTeeOutputFormat() {
-        // Default is .tee (console + structured JSONL) since e1e5cff.
-        let config = Testing.Configuration()
-        if case .tee = config.output.format {
-        } else {
-            #expect(false, "Expected .tee output format")
-        }
+        #expect(Observe.defaultConfiguration().formatIsTee, "Expected .tee output format")
     }
 
-    @Testing.Test
+    @Test
     func initCreatesDefaultConfigurationWithNilOutputPath() {
-        let config = Testing.Configuration()
-        #expect(config.output.path == nil)
+        #expect(Observe.defaultConfiguration().outputPathIsNil)
     }
 
-    @Testing.Test
+    @Test
     func stubFactoryCreatesConfigurationWithProvidedValues() {
-        let config = Testing.Configuration.stub(
-            filter: "MyTest",
-            concurrency: .serial,
-            output: .init(format: .json)
-        )
+        let config = Observe.stubConfiguration()
         #expect(config.filter == "MyTest")
-        if case .serial = config.concurrency {
-        } else {
-            #expect(false, "Expected .serial concurrency")
-        }
-        if case .json = config.output.format {
-        } else {
-            #expect(false, "Expected .json output format")
-        }
+        #expect(config.concurrencyIsSerial, "Expected .serial concurrency")
+        #expect(config.formatIsJSON, "Expected .json output format")
     }
 }
 
-// MARK: - EdgeCase
-
-extension Testing.Configuration.Test.`Edge Case` {
-    @Testing.Test
+extension `Configuration Test`.`Edge Case` {
+    @Test
     func currentWithNoEnvVarsReturnsDefaults() {
-        let config = Testing.Configuration.current
-        #expect(config.output.path == nil)
+        #expect(Observe.currentConfiguration().outputPathIsNil)
     }
 }

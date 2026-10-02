@@ -1,75 +1,42 @@
-import Test
-import Test_Application
-import Testing_Test_Support
+import Testing
 
-extension Testing {
-    @Suite
-    struct `Helpers Test` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-    }
+@Suite
+struct `Helpers Test` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
 }
 
-// MARK: - Unit
-
-extension Testing.`Helpers Test`.Unit {
-    @Testing.Test
+extension `Helpers Test`.Unit {
+    @Test
     func expectWithTrueReturnsPassingExpectation() {
-        let expectation = Testing.__expect(true)
-        #expect(expectation.isPassing)
+        #expect(Observe.expectTrueIsPassing())
     }
 
-    @Testing.Test
+    @Test
     func expectWithFalseReturnsFailingExpectation() {
-        let collector = Test.Expectation.Collector()
-        let expectation = Test.Expectation.Collector.with(collector) {
-            Testing.__expect(false)
-        }
-        #expect(expectation.isFailing)
+        #expect(Observe.expectFalseInCollectorIsFailing())
     }
 
-    @Testing.Test
+    @Test
     func requireWithTrueDoesNotThrow() throws {
-        try Testing.__require(true)
+        try Observe.requireTrue()
     }
 
-    @Testing.Test
+    @Test
     func requireWithNonNilOptionalReturnsUnwrappedValue() throws {
-        let value: Int? = 42
-        let unwrapped = try Testing.__require(value)
+        let unwrapped = try Observe.requireUnwrapping(42)
         #expect(unwrapped == 42)
     }
 }
 
-// MARK: - EdgeCase
-
-extension Testing.`Helpers Test`.`Edge Case` {
-    @Testing.Test
+extension `Helpers Test`.`Edge Case` {
+    @Test
     func requireWithFalseThrows() {
-        let collector = Test.Expectation.Collector()
-        do {
-            try Test.Expectation.Collector.with(collector) {
-                try Testing.__require(false)
-            }
-            #expect(false, "Expected __require(false) to throw")
-        } catch {
-            // Typed throws guarantees error: Test.Requirement.Failed
-            _ = error
-        }
+        #expect(Observe.requireFalseInCollectorThrows(), "Expected __require(false) to throw")
     }
 
-    @Testing.Test
+    @Test
     func requireWithNilOptionalThrows() {
-        let value: Int? = nil
-        let collector = Test.Expectation.Collector()
-        do {
-            _ = try Test.Expectation.Collector.with(collector) {
-                try Testing.__require(value)
-            }
-            #expect(false, "Expected __require(nil) to throw")
-        } catch {
-            // Typed throws guarantees error: Test.Requirement.Failed
-            _ = error
-        }
+        #expect(Observe.requireNilInCollectorThrows(), "Expected __require(nil) to throw")
     }
 }

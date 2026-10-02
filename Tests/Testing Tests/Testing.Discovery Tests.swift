@@ -1,26 +1,18 @@
-import Test_Application
-import Testing_Test_Support
+import Testing
 
-extension Testing.Discovery {
-    @Suite
-    struct Test {
-        @Suite struct Integration {}
-    }
+@Suite
+struct `Discovery Test` {
+    @Suite struct Integration {}
 }
 
-// MARK: - Integration
-
-extension Testing.Discovery.Test.Integration {
-    @Testing.Test
+extension `Discovery Test`.Integration {
+    @Test
     func sectionsReturnsARegistry() {
-        let registry = Testing.Discovery.sections()
-        // Registry was constructed — section enumeration completed without crash
-        _ = registry
+        Observe.discoverSections()
     }
 
-    @Testing.Test
+    @Test
     func allReturnsARegistry() {
-        let registry = Testing.Discovery.all()
-        _ = registry
+        Observe.discoverAll()
     }
 }
