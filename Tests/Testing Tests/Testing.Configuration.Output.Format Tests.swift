@@ -1,4 +1,4 @@
-import Testing
+import Test_Application
 import Testing_Test_Support
 
 extension Testing.Configuration.Output.Format {

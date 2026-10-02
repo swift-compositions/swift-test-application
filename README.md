@@ -23,7 +23,7 @@ The macro surface mirrors the familiar `@Test` / `#expect` idiom, so test code r
 ## Quick Start
 
 ```swift
-import Testing
+import Test_Application
 
 @Suite(.serialized)
 struct ParserTests {
@@ -64,7 +64,7 @@ struct TestRunner {
 Override dependencies for a single test scope; unset dependencies resolve to their `testValue`:
 
 ```swift
-import Testing
+import Test_Application
 
 @Test
 func featureUsesAPI() async throws {
@@ -95,7 +95,7 @@ Add the product to your test target:
 .testTarget(
     name: "YourTests",
     dependencies: [
-        .product(name: "Testing", package: "swift-testing")
+        .product(name: "Test Application", package: "swift-testing")
     ]
 )
 ```
@@ -154,7 +154,7 @@ Run.Error
 Handle it exhaustively with a typed `do`/`catch`:
 
 ```swift
-import Testing
+import Test_Application
 
 do throws(Run.Error) {
     try await Testing.run()

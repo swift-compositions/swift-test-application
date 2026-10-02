@@ -10,7 +10,7 @@
 // ===----------------------------------------------------------------------===//
 
 import Test
-import Testing
+import Test_Application
 import Testing_Test_Support
 // This file's whole purpose is the XCTest bridge described below: it
 // deliberately imports XCTest and subclasses XCTestCase so SwiftPM's

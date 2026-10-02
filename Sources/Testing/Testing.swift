@@ -18,7 +18,7 @@
 /// ## Usage
 ///
 /// ```swift
-/// import Testing
+/// import Test_Application
 ///
 /// @Suite
 /// struct MathTests {

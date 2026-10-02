@@ -15,7 +15,7 @@ let package = Package(
     products: [
         // Full testing library - users import this single module
         // Contains: macros + Test namespace + core implementation
-        .library(name: "Testing", targets: ["Testing"]),
+        .library(name: "Test Application", targets: ["Test Application"]),
         // Core implementation only (no macros) - for programmatic use
         .library(name: "Testing Core", targets: ["Testing Core"]),
         // Effects integration for testing effect handlers
@@ -67,7 +67,7 @@ let package = Package(
         // coexist with @_exported import of the macro implementation module.
         // This is an accepted deviation from MOD-005 (re-export-only umbrella).
         .target(
-            name: "Testing",
+            name: "Test Application",
             dependencies: [
                 "Testing Core",
                 "Testing Macros Implementation",
@@ -144,7 +144,7 @@ let package = Package(
         .testTarget(
             name: "Testing Tests",
             dependencies: [
-                "Testing",
+                "Test Application",
                 "Testing Test Support",
             ]
         ),
@@ -153,7 +153,7 @@ let package = Package(
         // .testTarget(
         //     name: "Macro Expansion Tests",
         //     dependencies: [
-        //         "Testing",
+        //         "Test Application",
         //         "Testing Test Support",
         //         "Testing Macros Implementation",
         //         .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
