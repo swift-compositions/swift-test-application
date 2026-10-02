@@ -118,13 +118,18 @@ extension Testing.Discovery {
             return
         }
 
+        let expectedType: Any.Type = kind == Test.__TestContentKind.suite.rawValue
+            ? Test.Suite.Registration.self
+            : Test.Registration.self
         var registrationPtr: UnsafeRawPointer? = nil
-        let success = unsafe accessor(
-            &registrationPtr,
-            UnsafeRawPointer(bitPattern: 1)!,
-            UnsafeRawPointer?(nil),
-            0
-        )
+        let success = unsafe withUnsafePointer(to: expectedType) { typePointer in
+            unsafe accessor(
+                &registrationPtr,
+                UnsafeRawPointer(typePointer),
+                UnsafeRawPointer?(nil),
+                0
+            )
+        }
 
         guard success, let ptr = unsafe registrationPtr else {
             return
