@@ -10,7 +10,7 @@
 // ===----------------------------------------------------------------------===//
 
 public import SwiftSyntax
-import SwiftSyntaxMacroExpansion
+public import SwiftSyntaxMacroExpansion
 public import SwiftSyntaxMacros
 public import SwiftSyntaxMacrosGenericTestSupport
 public import Test
@@ -32,7 +32,7 @@ public import Test
 ///         expandedSource: """
 ///         // expanded code
 ///         """,
-///         macros: ["myMacro": MyMacro.self]
+///         macroSpecs: ["myMacro": MacroSpec(type: MyMacro.self)]
 ///     )
 /// }
 /// ```
@@ -41,7 +41,7 @@ public import Test
 ///   - originalSource: The source code containing macro invocations.
 ///   - expectedExpandedSource: The expected expansion result.
 ///   - diagnostics: Expected diagnostics from the expansion.
-///   - macros: Dictionary mapping macro names to their implementations.
+///   - macroSpecs: Dictionary mapping macro names to their specifications.
 ///   - testModuleName: Name of the test module (for diagnostics).
 ///   - testFileName: Name of the test file (for diagnostics).
 ///   - indentationWidth: Indentation width for formatting.
@@ -55,10 +55,7 @@ public func assertMacroExpansion(
     _ originalSource: Swift.String,
     expandedSource expectedExpandedSource: Swift.String,
     diagnostics: [DiagnosticSpec] = [],
-    // Threads directly into SwiftSyntaxMacroExpansion.MacroSpec.init(type:
-    // Macro.Type) — the external API's own parameter shape.
-    // swiftlint:disable:next no_any_protocol_existential
-    macros: [Swift.String: any Macro.Type],
+    macroSpecs: [Swift.String: MacroSpec],
     testModuleName: Swift.String = "TestModule",
     testFileName: Swift.String = "test.swift",
     indentationWidth: Trivia = .spaces(4),
@@ -73,7 +70,7 @@ public func assertMacroExpansion(
         originalSource,
         expandedSource: expectedExpandedSource,
         diagnostics: diagnostics,
-        macroSpecs: macros.mapValues { MacroSpec(type: $0) },
+        macroSpecs: macroSpecs,
         testModuleName: testModuleName,
         testFileName: testFileName,
         indentationWidth: indentationWidth,

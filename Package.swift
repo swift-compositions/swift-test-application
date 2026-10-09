@@ -69,8 +69,8 @@ let package = Package(
         .target(
             name: "Test Application",
             dependencies: [
-                "Testing Core",
-                "Testing Macros Implementation",
+                .target(name: "Testing Core"),
+                .target(name: "Testing Macros Implementation"),
                 .product(name: "SwiftSyntax", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacroExpansion", package: "swift-syntax"),
@@ -118,7 +118,7 @@ let package = Package(
         .target(
             name: "Testing Effects",
             dependencies: [
-                "Testing Core",
+                .target(name: "Testing Core"),
                 .product(name: "Effects", package: "swift-effects"),
                 .product(name: "Effects Testing", package: "swift-effects"),
             ],
@@ -130,7 +130,7 @@ let package = Package(
         .target(
             name: "Testing Test Support",
             dependencies: [
-                "Testing Core",
+                .target(name: "Testing Core"),
                 .product(
                     name: "Tests Test Support",
                     package: "swift-tests"
@@ -144,8 +144,9 @@ let package = Package(
         .testTarget(
             name: "Testing Tests",
             dependencies: [
-                "Test Application",
-                "Testing Test Support",
+                .target(name: "Test Application"),
+                .target(name: "Testing Test Support"),
+                .product(name: "SwiftSyntaxMacroExpansion", package: "swift-syntax"),
             ]
         ),
         // Macro expansion tests require __TestContentRecord type from Apple's
