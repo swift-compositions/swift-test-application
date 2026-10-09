@@ -146,6 +146,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Test Application"),
                 .target(name: "Testing Test Support"),
+                .product(name: "SwiftSyntaxMacroExpansion", package: "swift-syntax"),
             ]
         ),
         // Macro expansion tests require __TestContentRecord type from Apple's
