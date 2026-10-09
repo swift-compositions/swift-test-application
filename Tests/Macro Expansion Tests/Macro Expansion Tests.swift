@@ -26,7 +26,7 @@ extension MacroExpansionTests.Unit {
                     column: #column
                 )
                 """,
-            macros: ["expect": ExpectMacro.self]
+            macroSpecs: ["expect": MacroSpec(type: ExpectMacro.self)]
         )
     }
 
@@ -46,7 +46,7 @@ extension MacroExpansionTests.Unit {
                     column: #column
                 )
                 """,
-            macros: ["expect": ExpectMacro.self]
+            macroSpecs: ["expect": MacroSpec(type: ExpectMacro.self)]
         )
     }
 
@@ -66,7 +66,7 @@ extension MacroExpansionTests.Unit {
                     column: #column
                 )
                 """,
-            macros: ["require": RequireMacro.self]
+            macroSpecs: ["require": MacroSpec(type: RequireMacro.self)]
         )
     }
 
@@ -86,7 +86,7 @@ extension MacroExpansionTests.Unit {
                     column: #column
                 )
                 """,
-            macros: ["require": RequireMacro.self]
+            macroSpecs: ["require": MacroSpec(type: RequireMacro.self)]
         )
     }
 
@@ -109,7 +109,7 @@ extension MacroExpansionTests.Unit {
                     }
                 }
                 """,
-            macros: ["Tests": TestsMacro.self]
+            macroSpecs: ["Tests": MacroSpec(type: TestsMacro.self)]
         )
     }
 }
