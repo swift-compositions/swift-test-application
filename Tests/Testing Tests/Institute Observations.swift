@@ -25,8 +25,8 @@ enum Observe {
 
     static func requireFalseInCollectorThrows() -> Bool {
         let collector = Test.Expectation.Collector()
-        do {
-            try Test.Expectation.Collector.with(collector) {
+        do throws(Test::Test.Requirement.Failed) {
+            try Test.Expectation.Collector.with(collector) { () throws(Test::Test.Requirement.Failed) in
                 try Testing.__require(false)
             }
             return false
@@ -38,8 +38,8 @@ enum Observe {
     static func requireNilInCollectorThrows() -> Bool {
         let value: Int? = nil
         let collector = Test.Expectation.Collector()
-        do {
-            _ = try Test.Expectation.Collector.with(collector) {
+        do throws(Test::Test.Requirement.Failed) {
+            _ = try Test.Expectation.Collector.with(collector) { () throws(Test::Test.Requirement.Failed) -> Int in
                 try Testing.__require(value)
             }
             return false
